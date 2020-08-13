@@ -1,1 +1,73 @@
+#1(a)
+Fun1 <- function(n)
+{
+  f1 <- 1
+  f2 <- 1
+  if(n == 1|n == 2)
+  {
+    return(f2)
+  }
+  else
+  {
+    for(i in 3:n)
+    {
+      F1 <- f2
+      f2 <- f1 + f2
+      f1 <- F1
+    }
+    return(f2)
+  }
+}
+Fun1(36)
+
+#1(b)
+BioCo <- function(n,k)  {   
+    if (k == 0 || k == n)
+      return=1;         
+    return=binomial(n - 1, k - 1) + binomial(n - 1, k); 
+}
+BioCo(88,44)
+
+#1(c)
+FuncGCD <- function(a,b){
+  if(!b){
+    return(a)
+  }else{
+    return(getGCD(b,a %% b))
+  }
+}
+FuncLCM <- function(a,b){
+  return(a*b/getGCD(a,b))
+}
+a=12306
+b=32148
+
+GCD=FuncGCD(12306,32148)
+print(GCD)
+LCM=FuncLCM(12306,32148)
+print(LCM)
+
+#2. Playing with the WHO Data Set
+getwd()
+WHO <- read.csv("~/Desktop/PS1/WHO.csv")
+View(WHO)
+#(a)
+sapply(WHO, function(x) sum(is.na(x)))
+#(b)
+WHO$Country[which.max(WHO$FertilityRate)]
+WHO$Country[which.min(WHO$FertilityRate)]
+which.max(WHO$FertilityRate)
+which.min(WHO$FertilityRate)
+#(c)
+tapply(WHO$GNI,INDEX=WHO$Region,FUN=sd,na.rm=TRUE)
+#(d)
+RichCountry = subset(WHO, GNI>20000,na.rm=TRUE)
+summary(RichCountry$ChildMortality)
+#(e)
+library(ggplot2)
+scatterplot = ggplot(WHO, aes(x = GNI, y = LifeExpectancy))
+scatterplot
+scatterplot+geom_point(colour = "Dark Green", size = 2, shape = 9) + ggtitle("Income Level vs. Life Expectancy")
+
+
 
